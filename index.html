@@ -19,21 +19,22 @@
             color: var(--text-light);
             margin: 0;
             padding: 0;
+            transition: background 0.5s;
         }
 
         header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000');
+            padding: 50px 20px;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1613771404721-1f92d799e49f?q=80&w=2000');
             background-size: cover;
             border-bottom: 3px solid var(--primary-gold);
         }
 
-        .hero-text h1 { font-size: 3rem; margin: 0; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 2px; }
-        .hero-text p { font-size: 1.2rem; color: #ccc; margin-top: 10px; }
+        .hero-text h1 { font-size: 2.8rem; margin: 0; color: var(--primary-gold); text-transform: uppercase; }
+        .hero-text p { font-size: 1.1rem; color: #ccc; max-width: 600px; margin: 15px auto; }
 
         .main-container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 40px auto;
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -43,32 +44,30 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             border: 1px solid #333;
             transition: 0.3s;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-gold);
-        }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--primary-gold); }
 
-        .product-card img {
+        .pack-img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: contain;
             margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         }
 
-        .price-tag { font-size: 1.5rem; color: var(--primary-gold); font-weight: bold; margin: 10px 0; }
+        .price-tag { font-size: 1.4rem; color: var(--primary-gold); font-weight: bold; margin: 10px 0; }
 
         .buy-btn {
             background: var(--primary-gold);
@@ -92,7 +91,7 @@
             border: 1px solid #444;
         }
 
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
 
         .vipps-btn {
             background-color: var(--vipps-orange);
@@ -102,29 +101,36 @@
             border-radius: 12px;
             cursor: pointer;
             margin-top: 20px;
-            transition: 0.2s;
+            display: flex;
+            justify-content: center;
         }
 
-        .vipps-btn:hover { opacity: 0.9; }
-        .vipps-btn img { height: 35px; }
+        .vipps-btn img { height: 30px; }
 
-        /* Checkout Skjema */
-        .checkout-form {
+        /* Checkout & Suksess */
+        .form-container {
             max-width: 500px;
-            margin: 50px auto;
+            margin: 60px auto;
             background: white;
-            color: black;
+            color: #1a1a1a;
             padding: 40px;
             border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         input {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin: 8px 0 18px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             box-sizing: border-box;
+        }
+
+        .success-page {
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
         }
 
         @media (max-width: 900px) {
@@ -132,143 +138,135 @@
         }
     </style>
 </head>
-<body>
+<body id="body-main">
 
-<header>
-    <div class="hero-text">
-        <h1>Rip'N Ship Pokemonpacks</h1>
-        <p>Rask levering, eller ha de liggende om du ønsker kjøpe mer før de sendes for billigere frakt!</p>
+<div id="shop-view">
+    <header>
+        <div class="hero-text">
+            <h1>Rip'N Ship Pokemonpacks</h1>
+            <p>Rask levering, eller ha de liggende om du ønsker kjøpe mer før de sendes for billigere frakt!</p>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/sv4pt5/pack.png" class="pack-img">
+                <h3>Paldean Fates</h3>
+                <div class="price-tag">75 kr</div>
+                <button class="buy-btn" onclick="addToCart('Paldean Fates', 75)">Legg i kurv</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/sv3pt5/pack.png" class="pack-img">
+                <h3>Pokémon 151</h3>
+                <div class="price-tag">99 kr</div>
+                <button class="buy-btn" onclick="addToCart('151 Special', 99)">Legg i kurv</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/swsh12pt5/pack.png" class="pack-img">
+                <h3>Crown Zenith</h3>
+                <div class="price-tag">89 kr</div>
+                <button class="buy-btn" onclick="addToCart('Crown Zenith', 89)">Legg i kurv</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/sv3/pack.png" class="pack-img">
+                <h3>Obsidian Flames</h3>
+                <div class="price-tag">65 kr</div>
+                <button class="buy-btn" onclick="addToCart('Obsidian Flames', 65)">Legg i kurv</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/swsh11/pack.png" class="pack-img">
+                <h3>Lost Origin</h3>
+                <div class="price-tag">85 kr</div>
+                <button class="buy-btn" onclick="addToCart('Lost Origin', 85)">Legg i kurv</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pokemontcg.io/sv6/pack.png" class="pack-img">
+                <h3>Twilight Masquerade</h3>
+                <div class="price-tag">69 kr</div>
+                <button class="buy-btn" onclick="addToCart('Twilight Masquerade', 69)">Legg i kurv</button>
+            </div>
+        </div>
+
+        <div class="cart-box">
+            <h2 style="margin-top:0;">Din Handlekurv</h2>
+            <div id="cart-items"><p style="color:#888;">Ingen varer valgt</p></div>
+            <hr style="border:0.5px solid #444; margin:20px 0;">
+            <div class="cart-item"><span>Varer:</span> <span id="subtotal">0 kr</span></div>
+            <div class="cart-item"><span>Frakt:</span> <span id="shipping">0 kr</span></div>
+            <div class="cart-item" style="font-size:1.4rem; font-weight:bold; color:var(--primary-gold); margin-top:10px;">
+                <span>Totalt:</span> <span id="grand-total">0 kr</span>
+            </div>
+            <button class="vipps-btn" onclick="goToAddress()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png">
+            </button>
+        </div>
     </div>
-</header>
+</div>
 
-<div class="main-container">
-    <div class="products-grid">
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv4pt5/pack.png" alt="Paldean Fates">
-            <h3>Paldean Fates</h3>
-            <p>Shiny Hunting!</p>
-            <div class="price-tag">75 kr</div>
-            <button class="buy-btn" onclick="addToCart('Paldean Fates', 75)">Legg i kurv</button>
+<div id="address-view" style="display:none;">
+    <div class="form-container">
+        <h2 style="margin-top:0;">Leveringsdetaljer</h2>
+        <p>Vennligst fyll inn info for utsendelse av pakker.</p>
+        <label>Fullt navn</label>
+        <input type="text" id="cust-name" placeholder="Navn på mottaker">
+        <label>Adresse</label>
+        <input type="text" placeholder="Gateadresse 12">
+        <div style="display:grid; grid-template-columns: 1fr 2fr; gap:10px;">
+            <input type="text" placeholder="Postnr">
+            <input type="text" placeholder="Sted">
         </div>
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv3pt5/pack.png" alt="151 Special">
-            <h3>151 Special Set</h3>
-            <p>Kanto Nostalgi</p>
-            <div class="price-tag">99 kr</div>
-            <button class="buy-btn" onclick="addToCart('151 Special', 99)">Legg i kurv</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/swsh12pt5/pack.png" alt="Crown Zenith">
-            <h3>Crown Zenith</h3>
-            <p>Favoritten til mange</p>
-            <div class="price-tag">89 kr</div>
-            <button class="buy-btn" onclick="addToCart('Crown Zenith', 89)">Legg i kurv</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv3/pack.png" alt="Obsidian Flames">
-            <h3>Obsidian Flames</h3>
-            <p>Charizard Chase!</p>
-            <div class="price-tag">65 kr</div>
-            <button class="buy-btn" onclick="addToCart('Obsidian Flames', 65)">Legg i kurv</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/swsh11/pack.png" alt="Lost Origin">
-            <h3>Lost Origin</h3>
-            <p>Giratina V Alt Art?</p>
-            <div class="price-tag">85 kr</div>
-            <button class="buy-btn" onclick="addToCart('Lost Origin', 85)">Legg i kurv</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv1/pack.png" alt="Scarlet Violet">
-            <h3>Scarlet & Violet</h3>
-            <p>Base Set Gen 9</p>
-            <div class="price-tag">59 kr</div>
-            <button class="buy-btn" onclick="addToCart('Scarlet & Violet', 59)">Legg i kurv</button>
-        </div>
-    </div>
-
-    <div class="cart-box">
-        <h2 style="margin-top:0;">Din Handlekurv</h2>
-        <div id="cart-items"><p>Ingen varer valgt</p></div>
-        <hr style="border:0.5px solid #444; margin:20px 0;">
-        
-        <div class="cart-item"><span>Varer:</span> <span id="subtotal">0 kr</span></div>
-        <div class="cart-item"><span>Frakt:</span> <span id="shipping">0 kr</span></div>
-        <div class="cart-item" style="font-size:1.4rem; font-weight:bold; color:var(--primary-gold);">
-            <span>Totalt:</span> <span id="grand-total">0 kr</span>
-        </div>
-
-        <button class="vipps-btn" onclick="showCheckout()">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" alt="Vipps Betaling">
+        <label>Telefon (for Vipps)</label>
+        <input type="tel" placeholder="123 45 678">
+        <button class="vipps-btn" onclick="goToSuccess()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png">
         </button>
+    </div>
+</div>
+
+<div id="success-view" style="display:none;" class="success-page">
+    <div style="background: #1a1a1a; padding: 50px; border-radius: 30px; display: inline-block; border: 2px solid var(--primary-gold);">
+        <h1 style="color: var(--primary-gold); font-size: 3rem;">Takk!</h1>
+        <p style="font-size: 1.5rem; max-width: 500px; margin: 20px auto;">
+            Her ville da <strong>fullført betaling</strong> stått om vippsen din var koblet opp.
+        </p>
+        <p style="opacity: 0.7;">Vi sender deg en bekreftelse så snart vi er klare for ripping!</p>
+        <button onclick="location.reload()" style="margin-top:30px; padding:10px 20px; cursor:pointer;">Tilbake til start</button>
     </div>
 </div>
 
 <script>
     let cart = [];
-    const shippingCost = 79;
+    const shippingPrice = 79;
 
     function addToCart(name, price) {
         cart.push({name, price});
-        updateCart();
+        updateUI();
     }
 
-    function updateCart() {
-        const itemsDiv = document.getElementById('cart-items');
-        const subtotalDiv = document.getElementById('subtotal');
-        const shippingDiv = document.getElementById('shipping');
-        const totalDiv = document.getElementById('grand-total');
-
-        if(cart.length === 0) {
-            itemsDiv.innerHTML = '<p>Ingen varer valgt</p>';
-            subtotalDiv.innerText = "0 kr";
-            shippingDiv.innerText = "0 kr";
-            totalDiv.innerText = "0 kr";
-            return;
-        }
-
-        let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-        itemsDiv.innerHTML = cart.map(item => `<div class="cart-item"><span>${item.name}</span><span>${item.price} kr</span></div>`).join('');
+    function updateUI() {
+        const list = document.getElementById('cart-items');
+        const subtotal = cart.reduce((s, i) => s + i.price, 0);
         
-        subtotalDiv.innerText = subtotal + " kr";
-        shippingDiv.innerText = shippingCost + " kr";
-        totalDiv.innerText = (subtotal + shippingCost) + " kr";
+        list.innerHTML = cart.length === 0 ? '<p>Ingen varer valgt</p>' : 
+            cart.map(i => `<div class="cart-item"><span>${i.name}</span><span>${i.price} kr</span></div>`).join('');
+        
+        document.getElementById('subtotal').innerText = subtotal + " kr";
+        document.getElementById('shipping').innerText = cart.length > 0 ? shippingPrice + " kr" : "0 kr";
+        document.getElementById('grand-total').innerText = cart.length > 0 ? (subtotal + shippingPrice) + " kr" : "0 kr";
     }
 
-    function showCheckout() {
-        if(cart.length === 0) return alert("Legg til pakker først!");
-        
-        let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-        let finalPrice = subtotal + shippingCost;
+    function goToAddress() {
+        if(cart.length === 0) return alert("Velg minst én pakke!");
+        document.getElementById('shop-view').style.display = 'none';
+        document.getElementById('address-view').style.display = 'block';
+        document.body.style.backgroundColor = "#f3f3f3";
+    }
 
-        document.body.innerHTML = `
-            <div class="checkout-form">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" style="background:var(--vipps-orange); padding:10px; border-radius:10px; width:100px; margin-bottom:20px;">
-                <h2 style="margin-bottom:5px;">Leveringsinformasjon</h2>
-                <p style="color:#666; margin-bottom:25px;">Fullfør din bestilling på <strong>${finalPrice} kr</strong></p>
-                
-                <label>Fullt navn</label>
-                <input type="text" placeholder="Ola Nordmann">
-                
-                <label>Gateadresse</label>
-                <input type="text" placeholder="Karl Johans gate 1">
-                
-                <label>Postnummer & Sted</label>
-                <div style="display:grid; grid-template-columns: 1fr 2fr; gap:10px;">
-                    <input type="text" placeholder="0001">
-                    <input type="text" placeholder="OSLO">
-                </div>
-                
-                <label>Telefon (Vipps-nummer)</label>
-                <input type="tel" placeholder="999 00 999">
-
-                <button onclick="location.reload()" style="background:var(--vipps-orange); color:white; border:none; padding:15px; width:100%; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:20px; font-size:1.1rem;">
-                    BETAL MED VIPPS
-                </button>
-                <p style="text-align:center; font-size:0.8rem; margin-top:15px; color:#888;">Demo-modus: Ingen ekte penger blir trukket.</p>
-            </div>
-        `;
-        document.body.style.backgroundColor = "#f0f0f0";
+    function goToSuccess() {
+        document.getElementById('address-view').style.display = 'none';
+        document.getElementById('success-view').style.display = 'block';
+        document.body.style.backgroundColor = "#ff5b24";
     }
 </script>
 
