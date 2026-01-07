@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéShop - Profesjonelt Kortsalg</title>
+    <style>
+        :root {
+            --primary-gold: #ffcb05;
+            --vipps-orange: #ff5b24;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-light: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--primary-gold);
+            margin-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Produkter */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #444;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        button.add-to-cart {
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        /* Handlevogn */
+        .cart-section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .vipps-btn {
+            background-color: var(--vipps-orange);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .vipps-logo {
+            height: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>POKÉSHOP <span style="color: var(--primary-gold)">COLLECTIBLES</span></h1>
+    <p>Sikre deg de sjeldneste pakkene raskt og enkelt</p>
+</header>
+
+<div class="container">
+    <div class="products-grid">
+        <div class="product-card">
+            <h3>Scarlet & Violet</h3>
+            <p>10 Kort per pakke</p>
+            <div class="price">59 kr</div>
+            <button class="add-to-cart" onclick="addToCart('Scarlet & Violet', 59)">Legg i kurv</button>
+        </div>
+
+        <div class="product-card">
+            <h3>Crown Zenith</h3>
+            <p>Spesialutgave</p>
+            <div class="price">79 kr</div>
+            <button class="add-to-cart" onclick="addToCart('Crown Zenith', 79)">Legg i kurv</button>
+        </div>
+
+        <div class="product-card">
+            <h3>151 Booster Pack</h3>
+            <p>Klassiske Pokémon</p>
+            <div class="price">89 kr</div>
+            <button class="add-to-cart" onclick="addToCart('151 Booster', 89)">Legg i kurv</button>
+        </div>
+    </div>
+
+    <div class="cart-section">
+        <h2>Din handlekurv</h2>
+        <div id="cart-items">
+            <p style="color: #888;">Kurven er tom...</p>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: space-between; font-size: 1.2rem;">
+            <strong>Total:</strong>
+            <strong id="total-price">0 kr</strong>
+        </div>
+
+        <button class="vipps-btn" onclick="goToVipps()">
+            Betal med 
+            <img src="https://sebraskinn.no/home/vipps-logo-wine/?srsltid=AfmBOopbjEvkXcAr_dZw-lvc-j-sEho0sZLKmfkLU3GZsrb1V8jGlow7" alt="Vipps" class="vipps-logo">
+        </button>
+    </div>
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartDiv = document.getElementById('cart-items');
+        const totalSpan = document.getElementById('total-price');
+        
+        if (cart.length === 0) {
+            cartDiv.innerHTML = '<p>Kurven er tom...</p>';
+            return;
+        }
+
+        cartDiv.innerHTML = '';
+        total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            cartDiv.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>${item.price} kr</span>
+                </div>
+            `;
+        });
+
+        totalSpan.innerText = total + ' kr';
+    }
+
+    function goToVipps() {
+        if (cart.length === 0) {
+            alert("Kurven er tom! Legg til noen pakker først.");
+            return;
+        }
+        
+        // Simulerer overgang til Vipps
+        document.body.innerHTML = `
+            <div style="text-align: center; margin-top: 100px; font-family: sans-serif;">
+                <img src="https://sebraskinn.no/home/vipps-logo-wine/?srsltid=AfmBOopbjEvkXcAr_dZw-lvc-j-sEho0sZLKmfkLU3GZsrb1V8jGlow7" style="width: 200px;">
+                <h1 style="color: white;">Her ville du kommet til Vipps</h1>
+                <p style="color: #ccc;">Beløp til betaling: <strong>${total} kr</strong></p>
+                <button onclick="location.reload()" style="padding: 10px; cursor: pointer;">Gå tilbake</button>
+            </div>
+        `;
+        document.body.style.backgroundColor = "#ff5b24";
+    }
+</script>
+
+</body>
+</html>
