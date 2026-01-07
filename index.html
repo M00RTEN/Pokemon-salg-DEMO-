@@ -3,101 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokéShop - Profesjonelt Kortsalg</title>
+    <title>Rip'N Ship Pokemonpacks - Demo</title>
     <style>
         :root {
             --primary-gold: #ffcb05;
             --vipps-orange: #ff5b24;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
+            --dark-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
             --text-light: #ffffff;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-light);
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
 
         header {
             text-align: center;
-            padding: 50px 0;
-            background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
-            border-bottom: 2px solid var(--primary-gold);
-            margin-bottom: 40px;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            border-bottom: 3px solid var(--primary-gold);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .hero-text h1 { font-size: 3rem; margin: 0; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 2px; }
+        .hero-text p { font-size: 1.2rem; color: #ccc; margin-top: 10px; }
+
+        .main-container {
+            max-width: 1300px;
+            margin: 40px auto;
             display: grid;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 1fr 350px;
             gap: 30px;
+            padding: 0 20px;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
         }
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 20px;
             text-align: center;
             border: 1px solid #333;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
         }
 
         .product-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary-gold);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
-        .pack-img {
+        .product-card img {
             width: 100%;
-            height: 300px;
+            height: 250px;
             object-fit: contain;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            margin-bottom: 15px;
         }
 
-        .price {
-            font-size: 1.5rem;
-            color: var(--primary-gold);
-            font-weight: 800;
-            margin: 15px 0;
-        }
+        .price-tag { font-size: 1.5rem; color: var(--primary-gold); font-weight: bold; margin: 10px 0; }
 
-        .add-btn {
+        .buy-btn {
             background: var(--primary-gold);
-            color: #000;
+            color: black;
             border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
+            padding: 12px;
             width: 100%;
-            transition: background 0.2s;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
         }
 
-        .add-btn:hover {
-            background: #e6b800;
-        }
-
-        .cart-section {
-            background: #1e1e1e;
+        .cart-box {
+            background: #222;
             padding: 25px;
             border-radius: 20px;
-            border: 1px solid #333;
             height: fit-content;
             position: sticky;
             top: 20px;
+            border: 1px solid #444;
         }
+
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
 
         .vipps-btn {
             background-color: var(--vipps-orange);
@@ -107,108 +102,173 @@
             border-radius: 12px;
             cursor: pointer;
             margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: 0.2s;
         }
 
-        .vipps-btn img {
-            height: 30px;
+        .vipps-btn:hover { opacity: 0.9; }
+        .vipps-btn img { height: 35px; }
+
+        /* Checkout Skjema */
+        .checkout-form {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            color: black;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
         @media (max-width: 900px) {
-            .container { grid-template-columns: 1fr; }
+            .main-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>POKÉMON <span style="color: var(--primary-gold)">VAULT</span></h1>
-    <p>Eksklusive Booster Packs - Rask levering</p>
+    <div class="hero-text">
+        <h1>Rip'N Ship Pokemonpacks</h1>
+        <p>Rask levering, eller ha de liggende om du ønsker kjøpe mer før de sendes for billigere frakt!</p>
+    </div>
 </header>
 
-<div class="container">
+<div class="main-container">
     <div class="products-grid">
         <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv1/pack.png" alt="Scarlet & Violet" class="pack-img">
-            <h3>Scarlet & Violet</h3>
-            <p>Base Set - Paldea Region</p>
-            <div class="price">69 kr</div>
-            <button class="add-btn" onclick="addToCart('Scarlet & Violet', 69)">Legg i kurv</button>
+            <img src="https://images.pokemontcg.io/sv4pt5/pack.png" alt="Paldean Fates">
+            <h3>Paldean Fates</h3>
+            <p>Shiny Hunting!</p>
+            <div class="price-tag">75 kr</div>
+            <button class="buy-btn" onclick="addToCart('Paldean Fates', 75)">Legg i kurv</button>
         </div>
-
         <div class="product-card">
-            <img src="https://images.pokemontcg.io/swsh12pt5/pack.png" alt="Crown Zenith" class="pack-img">
+            <img src="https://images.pokemontcg.io/sv3pt5/pack.png" alt="151 Special">
+            <h3>151 Special Set</h3>
+            <p>Kanto Nostalgi</p>
+            <div class="price-tag">99 kr</div>
+            <button class="buy-btn" onclick="addToCart('151 Special', 99)">Legg i kurv</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/swsh12pt5/pack.png" alt="Crown Zenith">
             <h3>Crown Zenith</h3>
-            <p>Galar Gallery Special</p>
-            <div class="price">89 kr</div>
-            <button class="add-btn" onclick="addToCart('Crown Zenith', 89)">Legg i kurv</button>
+            <p>Favoritten til mange</p>
+            <div class="price-tag">89 kr</div>
+            <button class="buy-btn" onclick="addToCart('Crown Zenith', 89)">Legg i kurv</button>
         </div>
-
         <div class="product-card">
-            <img src="https://images.pokemontcg.io/sv3pt5/pack.png" alt="151 Special" class="pack-img">
-            <h3>Pokémon 151</h3>
-            <p>Original Kanto Classics</p>
-            <div class="price">99 kr</div>
-            <button class="add-btn" onclick="addToCart('151 Special', 99)">Legg i kurv</button>
+            <img src="https://images.pokemontcg.io/sv3/pack.png" alt="Obsidian Flames">
+            <h3>Obsidian Flames</h3>
+            <p>Charizard Chase!</p>
+            <div class="price-tag">65 kr</div>
+            <button class="buy-btn" onclick="addToCart('Obsidian Flames', 65)">Legg i kurv</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/swsh11/pack.png" alt="Lost Origin">
+            <h3>Lost Origin</h3>
+            <p>Giratina V Alt Art?</p>
+            <div class="price-tag">85 kr</div>
+            <button class="buy-btn" onclick="addToCart('Lost Origin', 85)">Legg i kurv</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/sv1/pack.png" alt="Scarlet Violet">
+            <h3>Scarlet & Violet</h3>
+            <p>Base Set Gen 9</p>
+            <div class="price-tag">59 kr</div>
+            <button class="buy-btn" onclick="addToCart('Scarlet & Violet', 59)">Legg i kurv</button>
         </div>
     </div>
 
-    <div class="cart-section">
-        <h2 style="margin-top:0;">Din Kurv</h2>
-        <div id="cart-content"><p style="color:#666;">Kurven er tom</p></div>
-        <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-        <div style="display:flex; justify-content:space-between; font-size:1.3rem;">
-            <span>Total:</span>
-            <span id="total-sum" style="color:var(--primary-gold); font-weight:bold;">0 kr</span>
+    <div class="cart-box">
+        <h2 style="margin-top:0;">Din Handlekurv</h2>
+        <div id="cart-items"><p>Ingen varer valgt</p></div>
+        <hr style="border:0.5px solid #444; margin:20px 0;">
+        
+        <div class="cart-item"><span>Varer:</span> <span id="subtotal">0 kr</span></div>
+        <div class="cart-item"><span>Frakt:</span> <span id="shipping">0 kr</span></div>
+        <div class="cart-item" style="font-size:1.4rem; font-weight:bold; color:var(--primary-gold);">
+            <span>Totalt:</span> <span id="grand-total">0 kr</span>
         </div>
 
-        <button class="vipps-btn" onclick="startVipps()">
-            <img src="https://sebraskinn.no/home/vipps-logo-wine/?srsltid=AfmBOopbjEvkXcAr_dZw-lvc-j-sEho0sZLKmfkLU3GZsrb1V8jGlow7" alt="Vipps">
+        <button class="vipps-btn" onclick="showCheckout()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" alt="Vipps Betaling">
         </button>
     </div>
 </div>
 
 <script>
     let cart = [];
-    let total = 0;
+    const shippingCost = 79;
 
     function addToCart(name, price) {
         cart.push({name, price});
-        total += price;
-        renderCart();
+        updateCart();
     }
 
-    function renderCart() {
-        const content = document.getElementById('cart-content');
-        const sumDisplay = document.getElementById('total-sum');
-        
-        if (cart.length === 0) {
-            content.innerHTML = '<p style="color:#666;">Kurven er tom</p>';
-        } else {
-            content.innerHTML = cart.map(item => `
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                    <span>${item.name}</span>
-                    <span>${item.price} kr</span>
-                </div>
-            `).join('');
+    function updateCart() {
+        const itemsDiv = document.getElementById('cart-items');
+        const subtotalDiv = document.getElementById('subtotal');
+        const shippingDiv = document.getElementById('shipping');
+        const totalDiv = document.getElementById('grand-total');
+
+        if(cart.length === 0) {
+            itemsDiv.innerHTML = '<p>Ingen varer valgt</p>';
+            subtotalDiv.innerText = "0 kr";
+            shippingDiv.innerText = "0 kr";
+            totalDiv.innerText = "0 kr";
+            return;
         }
-        sumDisplay.innerText = total + " kr";
+
+        let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+        itemsDiv.innerHTML = cart.map(item => `<div class="cart-item"><span>${item.name}</span><span>${item.price} kr</span></div>`).join('');
+        
+        subtotalDiv.innerText = subtotal + " kr";
+        shippingDiv.innerText = shippingCost + " kr";
+        totalDiv.innerText = (subtotal + shippingCost) + " kr";
     }
 
-    function startVipps() {
-        if (total === 0) return alert("Vennligst legg til en pakke i kurven først!");
+    function showCheckout() {
+        if(cart.length === 0) return alert("Legg til pakker først!");
         
-        document.body.style.backgroundColor = "#ff5b24";
+        let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+        let finalPrice = subtotal + shippingCost;
+
         document.body.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; color:white; font-family:sans-serif; text-align:center; padding:20px;">
-                <img src="https://sebraskinn.no/home/vipps-logo-wine/?srsltid=AfmBOopbjEvkXcAr_dZw-lvc-j-sEho0sZLKmfkLU3GZsrb1V8jGlow7" width="280">
-                <h1 style="font-size:3rem; margin-top:40px;">Her ville du kommet til Vipps</h1>
-                <p style="font-size:1.5rem; opacity:0.9;">Beløp å betale: <strong>${total} kr</strong></p>
-                <button onclick="location.reload()" style="margin-top:30px; padding:15px 40px; border-radius:30px; border:none; font-weight:bold; cursor:pointer;">Avbryt og gå tilbake</button>
+            <div class="checkout-form">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" style="background:var(--vipps-orange); padding:10px; border-radius:10px; width:100px; margin-bottom:20px;">
+                <h2 style="margin-bottom:5px;">Leveringsinformasjon</h2>
+                <p style="color:#666; margin-bottom:25px;">Fullfør din bestilling på <strong>${finalPrice} kr</strong></p>
+                
+                <label>Fullt navn</label>
+                <input type="text" placeholder="Ola Nordmann">
+                
+                <label>Gateadresse</label>
+                <input type="text" placeholder="Karl Johans gate 1">
+                
+                <label>Postnummer & Sted</label>
+                <div style="display:grid; grid-template-columns: 1fr 2fr; gap:10px;">
+                    <input type="text" placeholder="0001">
+                    <input type="text" placeholder="OSLO">
+                </div>
+                
+                <label>Telefon (Vipps-nummer)</label>
+                <input type="tel" placeholder="999 00 999">
+
+                <button onclick="location.reload()" style="background:var(--vipps-orange); color:white; border:none; padding:15px; width:100%; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:20px; font-size:1.1rem;">
+                    BETAL MED VIPPS
+                </button>
+                <p style="text-align:center; font-size:0.8rem; margin-top:15px; color:#888;">Demo-modus: Ingen ekte penger blir trukket.</p>
             </div>
         `;
+        document.body.style.backgroundColor = "#f0f0f0";
     }
 </script>
 
