@@ -8,113 +8,201 @@
         :root {
             --vipps-orange: #ff5b24;
             --gold: #ffcb05;
-            --dark: #121212;
+            --dark: #0a0a0a;
+            --card-bg: #161616;
         }
 
-        body { font-family: sans-serif; background: var(--dark); color: white; margin: 0; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--dark); color: white; margin: 0; padding: 20px; }
         
-        /* Profesjonell Vipps-knapp med innebygd logo (ingen eksterne bilder) */
+        /* Fancy Overskrift */
+        .fancy-header {
+            text-align: center;
+            padding: 40px 0;
+            text-transform: uppercase;
+        }
+        .fancy-header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 203, 5, 0.4);
+            letter-spacing: 4px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 203, 5, 0.4); }
+            to { text-shadow: 0 0 30px rgba(255, 203, 5, 0.8); }
+        }
+
+        /* Grid for pakker */
+        .pack-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .product-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+
+        .pack-img { width: 100%; height: 300px; object-fit: contain; border-radius: 10px; margin-bottom: 15px; }
+        
+        /* Vipps Knapp med ren CSS-logo */
         .vipps-btn {
             background: var(--vipps-orange);
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 12px;
+            padding: 18px;
+            border-radius: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
+            transition: 0.2s;
         }
+        .vipps-btn:hover { filter: brightness(1.1); }
 
-        /* Dette lager "v-smilefjeset" til Vipps med ren kode */
-        .vipps-icon {
-            width: 30px;
-            height: 30px;
+        .vipps-smile {
+            width: 28px;
+            height: 28px;
             border-bottom: 4px solid white;
             border-radius: 50%;
             position: relative;
         }
-        .vipps-icon::before {
+        .vipps-smile::after {
             content: '';
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             background: white;
             border-radius: 50%;
-            top: 5px; left: 12px;
+            top: 4px; left: 11px;
         }
 
-        .product-card {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .pack-img { width: 100%; max-width: 200px; height: auto; border-radius: 10px; }
-        
         .hidden { display: none; }
+        .form-box { max-width: 500px; margin: 40px auto; background: white; color: black; padding: 40px; border-radius: 25px; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
 
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; }
     </style>
 </head>
 <body>
 
 <div id="step1">
-    <h1 style="color: var(--gold)">Rip'N Ship Pokemonpacks</h1>
-    <p>Rask levering og gode priser!</p>
+    <div class="fancy-header">
+        <h1>Rip'N Ship</h1>
+        <p style="color: #888;">Eksklusive Pokemonpacks • Rask levering</p>
+    </div>
 
-    <div class="product-card">
-        <img src="https://images.pokemontcg.io/sv4pt5/pack.png" class="pack-img" alt="Paldean Fates">
-        <h3>Paldean Fates</h3>
-        <p>Pris: 75 kr</p>
-        <button class="vipps-btn" onclick="goStep2()">
-            <div class="vipps-icon"></div> Kjøp med Vipps
-        </button>
+    <div class="pack-container">
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/sv4pt5/pack.png" class="pack-img">
+            <h3>Paldean Fates</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">75 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Paldean Fates', 75)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/sv3pt5/pack.png" class="pack-img">
+            <h3>Pokémon 151</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">99 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Pokémon 151', 99)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/swsh12pt5/pack.png" class="pack-img">
+            <h3>Crown Zenith</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">89 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Crown Zenith', 89)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/sv6/pack.png" class="pack-img">
+            <h3>Twilight Masquerade</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">69 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Twilight Masquerade', 69)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/swsh11/pack.png" class="pack-img">
+            <h3>Lost Origin</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">85 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Lost Origin', 85)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
+        <div class="product-card">
+            <img src="https://images.pokemontcg.io/sv3/pack.png" class="pack-img">
+            <h3>Obsidian Flames</h3>
+            <p style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">65 kr</p>
+            <button class="vipps-btn" onclick="goStep2('Obsidian Flames', 65)">
+                <div class="vipps-smile"></div> Kjøp med Vipps
+            </button>
+        </div>
     </div>
 </div>
 
 <div id="step2" class="hidden">
-    <h2>Leveringsinfo</h2>
-    <input type="text" placeholder="Fullt navn">
-    <input type="text" placeholder="Gateadresse">
-    <input type="tel" placeholder="Mobilnummer">
-    
-    <div style="margin: 20px 0; padding: 15px; background: #222; border-radius: 10px;">
-        Varesum: 75 kr<br>
-        Frakt: 79 kr<br>
-        <strong>Totalt: 154 kr</strong>
-    </div>
+    <div class="form-box">
+        <h2 style="margin-top:0;">Leveringsinfo</h2>
+        <p>Hvor skal vi sende dine pakker?</p>
+        <input type="text" placeholder="Fullt navn">
+        <input type="text" placeholder="Gateadresse">
+        <input type="tel" placeholder="Ditt mobilnummer">
+        
+        <div id="summary" style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 10px; border-left: 5px solid var(--vipps-orange);">
+            </div>
 
-    <button class="vipps-btn" onclick="goStep3()">
-        <div class="vipps-icon"></div> Betal 154 kr
-    </button>
+        <button class="vipps-btn" onclick="goStep3()">
+            <div class="vipps-smile"></div> Betal med Vipps
+        </button>
+    </div>
 </div>
 
-<div id="step3" class="hidden" style="text-align: center; padding-top: 50px;">
-    <div style="font-size: 5rem;">✅</div>
-    <h1>Takk for handelen!</h1>
-    <p style="font-size: 1.2rem; background: #222; padding: 20px; border-radius: 10px; border: 1px solid var(--gold);">
-        Her ville da <strong>fullført betaling</strong> stått om vippsen din var koblet opp.
-    </p>
-    <button onclick="location.reload()" style="background: none; border: 1px solid white; color: white; padding: 10px; margin-top: 20px; cursor: pointer;">Start på nytt</button>
+<div id="step3" class="hidden" style="text-align: center; padding-top: 80px;">
+    <div style="font-size: 6rem; margin-bottom: 20px;">📦</div>
+    <h1 style="color: var(--gold); font-size: 3rem;">Takk for bestillingen!</h1>
+    <div style="background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid #333; display: inline-block; max-width: 600px;">
+        <p style="font-size: 1.4rem;">Her ville da <strong>fullført betaling</strong> stått om vippsen din var koblet opp.</p>
+    </div>
+    <br>
+    <button onclick="location.reload()" style="background: none; border: 1px solid #555; color: #888; padding: 12px 25px; margin-top: 40px; cursor: pointer; border-radius: 10px;">Gå tilbake til butikk</button>
 </div>
 
 <script>
-    function goStep2() {
+    let currentTotal = 0;
+    const shipping = 79;
+
+    function goStep2(name, price) {
+        currentTotal = price + shipping;
+        document.getElementById('summary').innerHTML = `
+            <strong>Vare:</strong> ${name} (${price} kr)<br>
+            <strong>Frakt:</strong> ${shipping} kr<br><br>
+            <span style="font-size: 1.3rem;"><strong>Totalt: ${currentTotal} kr</strong></span>
+        `;
         document.getElementById('step1').classList.add('hidden');
         document.getElementById('step2').classList.remove('hidden');
+        window.scrollTo(0,0);
     }
+
     function goStep3() {
         document.getElementById('step2').classList.add('hidden');
         document.getElementById('step3').classList.remove('hidden');
-        document.body.style.background = "#ff5b24"; // Vipps-oransje på slutten
+        document.body.style.background = "#ff5b24"; 
+        window.scrollTo(0,0);
     }
 </script>
 
