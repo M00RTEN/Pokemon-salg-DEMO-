@@ -19,20 +19,22 @@
             color: var(--text-light);
             margin: 0;
             padding: 0;
-            transition: background 0.5s;
+            transition: background 0.5s ease;
         }
 
+        /* Header Seksjon */
         header {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1613771404721-1f92d799e49f?q=80&w=2000');
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1613771404721-1f92d799e49f?q=80&w=2000');
             background-size: cover;
             border-bottom: 3px solid var(--primary-gold);
         }
 
-        .hero-text h1 { font-size: 2.8rem; margin: 0; color: var(--primary-gold); text-transform: uppercase; }
-        .hero-text p { font-size: 1.1rem; color: #ccc; max-width: 600px; margin: 15px auto; }
+        .hero-text h1 { font-size: 2.8rem; margin: 0; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 1px; }
+        .hero-text p { font-size: 1.1rem; color: #ccc; max-width: 700px; margin: 15px auto; line-height: 1.6; }
 
+        /* Layout */
         .main-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -42,6 +44,7 @@
             padding: 0 20px;
         }
 
+        /* Produkter */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -81,6 +84,7 @@
             text-transform: uppercase;
         }
 
+        /* Handlekurv */
         .cart-box {
             background: #222;
             padding: 25px;
@@ -103,11 +107,12 @@
             margin-top: 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         .vipps-btn img { height: 30px; }
 
-        /* Checkout & Suksess */
+        /* Skjema og Suksess */
         .form-container {
             max-width: 500px;
             margin: 60px auto;
@@ -118,10 +123,11 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
+        label { font-weight: bold; display: block; margin-top: 10px; }
         input {
             width: 100%;
             padding: 12px;
-            margin: 8px 0 18px 0;
+            margin: 8px 0 10px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-sizing: border-box;
@@ -138,7 +144,7 @@
         }
     </style>
 </head>
-<body id="body-main">
+<body id="page-body">
 
 <div id="shop-view">
     <header>
@@ -198,7 +204,7 @@
                 <span>Totalt:</span> <span id="grand-total">0 kr</span>
             </div>
             <button class="vipps-btn" onclick="goToAddress()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" alt="Vipps">
             </button>
         </div>
     </div>
@@ -207,31 +213,46 @@
 <div id="address-view" style="display:none;">
     <div class="form-container">
         <h2 style="margin-top:0;">Leveringsdetaljer</h2>
-        <p>Vennligst fyll inn info for utsendelse av pakker.</p>
+        <p>Hvor skal vi sende dine Rip'N Ship pakker?</p>
+        
         <label>Fullt navn</label>
-        <input type="text" id="cust-name" placeholder="Navn på mottaker">
+        <input type="text" placeholder="Ola Nordmann">
+        
         <label>Adresse</label>
-        <input type="text" placeholder="Gateadresse 12">
+        <input type="text" placeholder="Gateveien 1">
+        
         <div style="display:grid; grid-template-columns: 1fr 2fr; gap:10px;">
-            <input type="text" placeholder="Postnr">
-            <input type="text" placeholder="Sted">
+            <div>
+                <label>Postnr</label>
+                <input type="text" placeholder="0001">
+            </div>
+            <div>
+                <label>Sted</label>
+                <input type="text" placeholder="OSLO">
+            </div>
         </div>
+        
         <label>Telefon (for Vipps)</label>
-        <input type="tel" placeholder="123 45 678">
+        <input type="tel" placeholder="999 00 999">
+
         <button class="vipps-btn" onclick="goToSuccess()">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Vipps_logo_white.svg/2560px-Vipps_logo_white.svg.png" alt="Betal med Vipps">
         </button>
     </div>
 </div>
 
 <div id="success-view" style="display:none;" class="success-page">
-    <div style="background: #1a1a1a; padding: 50px; border-radius: 30px; display: inline-block; border: 2px solid var(--primary-gold);">
-        <h1 style="color: var(--primary-gold); font-size: 3rem;">Takk!</h1>
-        <p style="font-size: 1.5rem; max-width: 500px; margin: 20px auto;">
-            Her ville da <strong>fullført betaling</strong> stått om vippsen din var koblet opp.
-        </p>
-        <p style="opacity: 0.7;">Vi sender deg en bekreftelse så snart vi er klare for ripping!</p>
-        <button onclick="location.reload()" style="margin-top:30px; padding:10px 20px; cursor:pointer;">Tilbake til start</button>
+    <div style="background: #1a1a1a; padding: 60px; border-radius: 30px; display: inline-block; border: 2px solid var(--primary-gold); box-shadow: 0 10px 50px rgba(0,0,0,0.8);">
+        <h1 style="color: var(--primary-gold); font-size: 3.5rem; margin-bottom: 10px;">Takk!</h1>
+        <div style="font-size: 1.4rem; line-height: 1.6; max-width: 500px; margin: 0 auto;">
+            <p>Her ville da <strong>fullført betaling</strong> stått om vippsen din var koblet opp.</p>
+            <p style="color: #888; font-size: 1.1rem; margin-top: 20px;">
+                Dette er en demo-avslutning for din profesjonelle Pokémon-butikk.
+            </p>
+        </div>
+        <button onclick="location.reload()" style="margin-top:40px; padding:15px 30px; cursor:pointer; background: transparent; border: 1px solid #555; color: white; border-radius: 10px;">
+            Start demo på nytt
+        </button>
     </div>
 </div>
 
@@ -248,7 +269,7 @@
         const list = document.getElementById('cart-items');
         const subtotal = cart.reduce((s, i) => s + i.price, 0);
         
-        list.innerHTML = cart.length === 0 ? '<p>Ingen varer valgt</p>' : 
+        list.innerHTML = cart.length === 0 ? '<p style="color:#888;">Ingen varer valgt</p>' : 
             cart.map(i => `<div class="cart-item"><span>${i.name}</span><span>${i.price} kr</span></div>`).join('');
         
         document.getElementById('subtotal').innerText = subtotal + " kr";
@@ -257,10 +278,10 @@
     }
 
     function goToAddress() {
-        if(cart.length === 0) return alert("Velg minst én pakke!");
+        if(cart.length === 0) return alert("Vennligst legg til minst én pakke i kurven!");
         document.getElementById('shop-view').style.display = 'none';
         document.getElementById('address-view').style.display = 'block';
-        document.body.style.backgroundColor = "#f3f3f3";
+        document.body.style.backgroundColor = "#f0f0f0";
     }
 
     function goToSuccess() {
